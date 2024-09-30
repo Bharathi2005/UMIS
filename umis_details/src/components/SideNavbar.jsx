@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 
 const SideNavbar = () => {
   return (
-    <aside className="bg-green-600 text-black font-bold w-60 h-screen fixed top-16">
-      <ul className="mt-4 space-y-4 px-4 flex flex-col">
+    <aside className="bg-green-600 text-xl text-black font-bold w-60 h-screen fixed top-25">
+      <ul className="mt-12 space-y-4 px-4 flex flex-col">
         <li>
           <NavLink
             to="/about"
