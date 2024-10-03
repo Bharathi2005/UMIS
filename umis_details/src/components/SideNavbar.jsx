@@ -12,7 +12,7 @@ const SideNavbar = () => {
               `block p-2 rounded ${isActive ? "bg-yellow-400 text-black" : "hover:bg-white"}`
             }
           >
-            About
+            Instruction
           </NavLink>
         </li>
         <li>
