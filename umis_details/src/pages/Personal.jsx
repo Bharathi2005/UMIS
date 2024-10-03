@@ -5,7 +5,7 @@ const Personal = () => {
     <div className="p-8">
       <div>
         <span className="title" style={{ textAlign: 'center', display: 'block', marginBottom: '20px' }}>
-          <strong>PERSONAL DETAILS</strong>
+          <strong className="text-2xl">PERSONAL DETAILS</strong>
         </span>
         <div className="fields">
           <div className="grid-container">
