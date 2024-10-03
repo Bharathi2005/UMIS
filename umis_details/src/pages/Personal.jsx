@@ -21,7 +21,7 @@ const Personal = () => {
             <input type="email" id="email" name="email" required />
           </div>
 
-          {/* Salutation */}
+          
           <div className="input-field">
             <label>Salutation</label>
             <select style={{ backgroundColor: 'white' }} name="salutation" required>
