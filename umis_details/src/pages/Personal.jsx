@@ -1,8 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Personal = () => {
   const navigate = useNavigate();
+
+  const [formValues, setFormValues] = useState({
+    fullnames: '',
+    email: '',
+    salutation: '',
+    dob: '',
+    gender: '',
+    blood: '',
+    nationality: '',
+    religion: '',
+    community: '',
+    caste: '',
+    aadhar: '',
+    mobile: '',
+    orphan: '',
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+  };
 
   const handleSaveAndContinue = (e) => {
     e.preventDefault();
@@ -10,11 +34,13 @@ const Personal = () => {
   };
 
   return (
+    <div className="instructions-container bg-gray-100 p-8 rounded-lg shadow-md max-w-3xl mx-auto my-8">
+
     <div className="p-8">
-      <form>
+      <form onSubmit={handleSaveAndContinue}>
         <div>
           <span className="title" style={{ textAlign: 'center', display: 'block', marginBottom: '20px' }}>
-            <strong className='text-2xl'>PERSONAL DETAILS</strong>
+            <strong className="text-2xl">PERSONAL DETAILS</strong>
           </span>
 
           <div className="fields">
@@ -22,39 +48,47 @@ const Personal = () => {
               {/* Full Name */}
               <div className="input-field">
                 <label htmlFor="fullnames">Full Name</label>
-                <input 
-                  type="text" 
-                  required 
-                  id="fullnames" 
-                  name="fullnames" 
-                  onInvalid={e => e.target.setCustomValidity('Please enter your full name')}
-                  onInput={e => e.target.setCustomValidity('')} 
+                <input
+                  type="text"
+                  required
+                  id="fullnames"
+                  name="fullnames"
+                  value={formValues.fullnames}
+                  onChange={handleInputChange}
+                  onInvalid={(e) => e.target.setCustomValidity('Please enter your full name')}
+                  onInput={(e) => e.target.setCustomValidity('')}
                 />
               </div>
 
               {/* Email */}
               <div className="input-field">
                 <label htmlFor="email">Email</label>
-                <input 
-                  type="email" 
-                  id="email" 
-                  name="email" 
-                  required 
-                  onInvalid={e => e.target.setCustomValidity('Please enter a valid email')}
-                  onInput={e => e.target.setCustomValidity('')} 
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formValues.email}
+                  required
+                  onChange={handleInputChange}
+                  onInvalid={(e) => e.target.setCustomValidity('Please enter a valid email')}
+                  onInput={(e) => e.target.setCustomValidity('')}
                 />
               </div>
 
               {/* Salutation */}
               <div className="input-field">
                 <label>Salutation</label>
-                <select 
-                  name="salutation" 
-                  required 
-                  onInvalid={e => e.target.setCustomValidity('Please select a salutation')}
-                  onInput={e => e.target.setCustomValidity('')}
+                <select
+                  name="salutation"
+                  value={formValues.salutation}
+                  required
+                  onChange={handleInputChange}
+                  onInvalid={(e) => e.target.setCustomValidity('Please select a salutation')}
+                  onInput={(e) => e.target.setCustomValidity('')}
                 >
-                  <option disabled selected>Select Salutation</option>
+                  <option value="" disabled>
+                    Select Salutation
+                  </option>
                   <option>Selvan</option>
                   <option>Selvi</option>
                 </select>
@@ -63,25 +97,31 @@ const Personal = () => {
               {/* Date of Birth */}
               <div className="input-field">
                 <label>Date of Birth</label>
-                <input 
-                  type="date" 
-                  name="dob" 
-                  required 
-                  onInvalid={e => e.target.setCustomValidity('Please select your date of birth')}
-                  onInput={e => e.target.setCustomValidity('')} 
+                <input
+                  type="date"
+                  name="dob"
+                  value={formValues.dob}
+                  required
+                  onChange={handleInputChange}
+                  onInvalid={(e) => e.target.setCustomValidity('Please select your date of birth')}
+                  onInput={(e) => e.target.setCustomValidity('')}
                 />
               </div>
 
               {/* Gender */}
               <div className="input-field">
                 <label>Gender</label>
-                <select 
-                  name="gender" 
-                  required 
-                  onInvalid={e => e.target.setCustomValidity('Please select your gender')}
-                  onInput={e => e.target.setCustomValidity('')} 
+                <select
+                  name="gender"
+                  value={formValues.gender}
+                  required
+                  onChange={handleInputChange}
+                  onInvalid={(e) => e.target.setCustomValidity('Please select your gender')}
+                  onInput={(e) => e.target.setCustomValidity('')}
                 >
-                  <option disabled selected>Select Gender</option>
+                  <option value="" disabled>
+                    Select Gender
+                  </option>
                   <option>Male</option>
                   <option>Female</option>
                   <option>Others</option>
@@ -91,14 +131,17 @@ const Personal = () => {
               {/* Blood Group */}
               <div className="input-field">
                 <label>Blood Group</label>
-                <select 
-                  name="blood" 
-                  id="blood-group" 
-                  required 
-                  onInvalid={e => e.target.setCustomValidity('Please select your blood group')}
-                  onInput={e => e.target.setCustomValidity('')} 
+                <select
+                  name="blood"
+                  value={formValues.blood}
+                  required
+                  onChange={handleInputChange}
+                  onInvalid={(e) => e.target.setCustomValidity('Please select your blood group')}
+                  onInput={(e) => e.target.setCustomValidity('')}
                 >
-                  <option disabled selected>Select Blood Group</option>
+                  <option value="" disabled>
+                    Select Blood Group
+                  </option>
                   <option value="A+ve">A+ve</option>
                   <option value="A1+ve">A1+ve</option>
                   <option value="B+ve">B+ve</option>
@@ -114,24 +157,30 @@ const Personal = () => {
               {/* Nationality */}
               <div className="input-field">
                 <label>Nationality</label>
-                <input 
-                  type="text" 
-                  name="nationality" 
-                  required 
-                  onInvalid={e => e.target.setCustomValidity('Please enter your nationality')}
-                  onInput={e => e.target.setCustomValidity('')} 
+                <input
+                  type="text"
+                  name="nationality"
+                  value={formValues.nationality}
+                  required
+                  onChange={handleInputChange}
+                  onInvalid={(e) => e.target.setCustomValidity('Please enter your nationality')}
+                  onInput={(e) => e.target.setCustomValidity('')}
                 />
               </div>
 
               {/* Religion */}
               <div className="input-field">
                 <label>Religion</label>
-                <select 
-                  name="religion" 
-                  onInvalid={e => e.target.setCustomValidity('Please select your religion')}
-                  onInput={e => e.target.setCustomValidity('')} 
+                <select
+                  name="religion"
+                  value={formValues.religion}
+                  onChange={handleInputChange}
+                  onInvalid={(e) => e.target.setCustomValidity('Please select your religion')}
+                  onInput={(e) => e.target.setCustomValidity('')}
                 >
-                  <option disabled selected>Select Religion</option>
+                  <option value="" disabled>
+                    Select Religion
+                  </option>
                   <option>Hindus</option>
                   <option>Muslims</option>
                   <option>Christians</option>
@@ -148,13 +197,17 @@ const Personal = () => {
               {/* Community */}
               <div className="input-field">
                 <label>Community</label>
-                <select 
-                  name="community" 
-                  required 
-                  onInvalid={e => e.target.setCustomValidity('Please select your community')}
-                  onInput={e => e.target.setCustomValidity('')} 
+                <select
+                  name="community"
+                  value={formValues.community}
+                  required
+                  onChange={handleInputChange}
+                  onInvalid={(e) => e.target.setCustomValidity('Please select your community')}
+                  onInput={(e) => e.target.setCustomValidity('')}
                 >
-                  <option disabled selected>Select Community</option>
+                  <option value="" disabled>
+                    Select Community
+                  </option>
                   <option value="OBC">OBC</option>
                   <option value="BC">BC</option>
                   <option value="MBC">MBC</option>
@@ -168,66 +221,77 @@ const Personal = () => {
               {/* Caste */}
               <div className="input-field">
                 <label>Caste</label>
-                <input 
-                  type="text" 
-                  name="caste" 
-                  required 
-                  onInvalid={e => e.target.setCustomValidity('Please enter your caste')}
-                  onInput={e => e.target.setCustomValidity('')} 
+                <input
+                  type="text"
+                  name="caste"
+                  value={formValues.caste}
+                  required
+                  onChange={handleInputChange}
+                  onInvalid={(e) => e.target.setCustomValidity('Please enter your caste')}
+                  onInput={(e) => e.target.setCustomValidity('')}
                 />
               </div>
 
               {/* Aadhar Number */}
               <div className="input-field">
                 <label htmlFor="aadhar">Aadhar Number</label>
-                <input 
-                  type="text" 
-                  id="aadhar" 
-                  name="aadhar" 
-                  required 
-                  onInvalid={e => e.target.setCustomValidity('Please enter your Aadhar number')}
-                  onInput={e => e.target.setCustomValidity('')} 
+                <input
+                  type="text"
+                  id="aadhar"
+                  name="aadhar"
+                  value={formValues.aadhar}
+                  required
+                  onChange={handleInputChange}
+                  onInvalid={(e) => e.target.setCustomValidity('Please enter your Aadhar number')}
+                  onInput={(e) => e.target.setCustomValidity('')}
                 />
               </div>
 
               {/* Mobile Number */}
               <div className="input-field">
                 <label htmlFor="mobile">Mobile Number</label>
-                <input 
-                  type="tel" 
-                  id="mobile" 
-                  name="mobile" 
-                  required 
-                  onInvalid={e => e.target.setCustomValidity('Please enter your mobile number')}
-                  onInput={e => e.target.setCustomValidity('')} 
+                <input
+                  type="tel"
+                  id="mobile"
+                  name="mobile"
+                  value={formValues.mobile}
+                  required
+                  onChange={handleInputChange}
+                  onInvalid={(e) => e.target.setCustomValidity('Please enter your mobile number')}
+                  onInput={(e) => e.target.setCustomValidity('')}
                 />
               </div>
 
               {/* Orphan */}
               <div className="input-field">
                 <label>Orphan</label>
-                <select 
-                  name="orphan" 
-                  required 
-                  onInvalid={e => e.target.setCustomValidity('Please select whether you are an orphan')}
-                  onInput={e => e.target.setCustomValidity('')} 
+                <select
+                  name="orphan"
+                  value={formValues.orphan}
+                  required
+                  onChange={handleInputChange}
+                  onInvalid={(e) => e.target.setCustomValidity('Please select whether you are an orphan')}
+                  onInput={(e) => e.target.setCustomValidity('')}
                 >
-                  <option disabled selected>Select Option</option>
+                  <option value="" disabled>
+                    Select Option
+                  </option>
                   <option>YES</option>
                   <option>NO</option>
                 </select>
               </div>
             </div>
           </div>
+        </div>
 
-        
+        <div className="flex justify-end items-end">
+          <button type="submit" className="save-continue hover flex justify-end items-end">
+            Save and Continue
+          </button>
         </div>
       </form>
-      <div className='flex justify-end items-end'>
-      <button className="save-continue hover flex justify-end items-end" onClick={handleSaveAndContinue}>Save and Continue</button>
-      </div>
     </div>
-
+    </div>
   );
 };
 
