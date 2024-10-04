@@ -30,7 +30,7 @@ const Address = () => {
   };
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-6 max-w-lg mx-auto my-8">
+    <div className=" bg-gray-100  shadow-2xl rounded-lg p-6 max-w-lg mx-auto my-8">
       <h2 className="text-2xl font-semibold text-center mb-6">Address Details</h2>
       <form onSubmit={handleSaveAndContinue} className="space-y-4">
         {/* Current Address */}
@@ -175,7 +175,7 @@ const Address = () => {
         <div className="flex justify-end mt-4">
           <button
             type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            className="bg-blue-500 text-white px-4 py-2 rounded"
           >
             Save and Continue
           </button>

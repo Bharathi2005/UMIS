@@ -1,15 +1,16 @@
+// SideNavbar.js
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const SideNavbar = () => {
+const SideNavbar = ({ toggleSidebar }) => {
   return (
-    <aside className="bg-green-600 text-xl text-black font-bold w-60 h-screen fixed top-25">
+    <aside className="navbg text-xl text-white font-bold w-60 h-screen fixed top-25 left-0 transition-transform duration-300" onClick={toggleSidebar}>
       <ul className="mt-12 space-y-4 px-4 flex flex-col">
         <li>
           <NavLink
-            to="/about"
+            to="/"
             className={({ isActive }) =>
-              `block p-2 rounded ${isActive ? "bg-yellow-400 text-black" : "hover:bg-white"}`
+              `block p-2 rounded ${isActive ? "bg-neutral-500" : "hover:bg-slate-400"}`
             }
           >
             Instruction
@@ -19,7 +20,7 @@ const SideNavbar = () => {
           <NavLink
             to="/personal"
             className={({ isActive }) =>
-              `block p-2 rounded ${isActive ? "bg-yellow-400 text-black" : "hover:bg-white"}`
+              `block p-2 rounded ${isActive ? "bg-neutral-500" : "hover:bg-slate-400"}`
             }
           >
             Personal Details
@@ -29,7 +30,7 @@ const SideNavbar = () => {
           <NavLink
             to="/education"
             className={({ isActive }) =>
-              `block p-2 rounded ${isActive ? "bg-yellow-400 text-black" : "hover:bg-white"}`
+              `block p-2 rounded ${isActive ? "bg-neutral-500" : "hover:bg-slate-400"}`
             }
           >
             Education Details
@@ -39,7 +40,7 @@ const SideNavbar = () => {
           <NavLink
             to="/bank"
             className={({ isActive }) =>
-              `block p-2 rounded ${isActive ? "bg-yellow-400 text-black" : "hover:bg-white"}`
+              `block p-2 rounded ${isActive ? "bg-neutral-500" : "hover:bg-slate-400"}`
             }
           >
             Bank Details
@@ -49,7 +50,7 @@ const SideNavbar = () => {
           <NavLink
             to="/address"
             className={({ isActive }) =>
-              `block p-2 rounded ${isActive ? "bg-yellow-400 text-black" : "hover:bg-white"}`
+              `block p-2 rounded ${isActive ? "bg-neutral-500" : "hover:bg-slate-400"}`
             }
           >
             Address
@@ -59,7 +60,7 @@ const SideNavbar = () => {
           <NavLink
             to="/certificates"
             className={({ isActive }) =>
-              `block p-2 rounded ${isActive ? "bg-yellow-400 text-black" : "hover:bg-white"}`
+              `block p-2 rounded ${isActive ? "bg-neutral-500" : "hover:bg-slate-400"}`
             }
           >
             Certificates

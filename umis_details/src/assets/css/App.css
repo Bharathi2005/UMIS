@@ -1,18 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body{
+  background-color:#fff;
+}
 .save-continue {
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: #28a745;
+    background-color: #1067f2;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
   }
 
+  .navbg{
+    background-color: #4885e8;
+  }
   .save-continue:hover {
-    background-color: #218838;
+    background-color: #4885e8;
   }
 
   .grid-container {

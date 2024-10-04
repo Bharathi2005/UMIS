@@ -34,7 +34,7 @@ const Personal = () => {
   };
 
   return (
-    <div className="instructions-container bg-gray-100 p-8 rounded-lg shadow-md max-w-3xl mx-auto my-8">
+    <div className="instructions-container bg-gray-100 p-8 rounded-lg shadow-2xl max-w-3xl mx-auto my-8">
 
     <div className="p-8">
       <form onSubmit={handleSaveAndContinue}>

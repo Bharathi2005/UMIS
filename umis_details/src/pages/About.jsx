@@ -1,8 +1,17 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 
-const FormInstructions = () => {
+const About = () => {
+  const navigate = useNavigate();
+
+  const handleContinue = () => {
+    navigate('/personal'); // Redirect to the Personal Details page
+  };
+
   return (
-    <div className="instructions-container bg-gray-100 p-8 rounded-lg shadow-md max-w-3xl mx-auto my-8">
+    
+
+    <div className="instructions-container bg-gray-100 p-8 rounded-lg shadow-2xl max-w-3xl mx-auto my-8">
       <h2 className="text-3xl font-bold mb-6 text-blue-800 text-center">General Instructions for Filling Out the Form</h2>
 
       <ul className="list-disc ml-8 text-lg text-gray-700">
@@ -34,8 +43,16 @@ const FormInstructions = () => {
           <strong>Contact Support:</strong> If you encounter issues or need clarification, contact support for assistance.
         </li>
       </ul>
+
+      <button
+        onClick={handleContinue}
+        className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
+      >
+        Continue
+      </button>
     </div>
+   
   );
 };
 
-export default FormInstructions;
+export default About;

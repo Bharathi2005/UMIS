@@ -11,7 +11,7 @@ const BankDetails = () => {
   };
 
   return (
-    <div className="instructions-container bg-gray-100 p-8 rounded-lg shadow-md max-w-3xl mx-auto my-8">
+    <div className="instructions-container bg-gray-100 p-8 rounded-lg shadow-2xl max-w-3xl mx-auto my-8">
       <div className="bank-details p-8">
         <span className="title" style={{ textAlign: "center", display: "block", marginBottom: "20px" }}>
           <strong className="text-2xl">BANK DETAILS</strong>
