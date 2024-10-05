@@ -9,6 +9,7 @@ import BankDetails from "./pages/Bank";
 import Address from "./pages/Address";
 import Certificates from "./pages/Certificates";
 import About from "./pages/About";
+import Submission from "./pages/Submission"; // Make sure this component exists
 import { AlignJustify } from "lucide-react";
 
 const App = () => {
@@ -35,6 +36,7 @@ const App = () => {
             <button
               onClick={toggleSidebar}
               className="fixed top-10 left-4 z-50 bg-blue-600 text-white p-2 rounded-md focus:outline-none flex items-center gap-2"
+              aria-label={isOpen ? "UMIS Details" : "UMIS Details"}
             >
               <AlignJustify />
               <span>{isOpen ? "UMIS Details" : "UMIS Details"}</span>
@@ -47,6 +49,7 @@ const App = () => {
               <Route path="/address" element={<Address />} />
               <Route path="/certificates" element={<Certificates />} />
               <Route path="/" element={<About />} />
+              <Route path="/submission" element={<Submission />} />
             </Routes>
           </div>
         </div>

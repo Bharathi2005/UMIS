@@ -26,7 +26,7 @@ const Address = () => {
   const handleSaveAndContinue = (e) => {
     e.preventDefault();
     // Perform any validation or save logic here if necessary
-    navigate("/bank"); // Navigate to the Bank Details page
+    navigate("/certificates"); // Navigate to the Bank Details page
   };
 
   return (

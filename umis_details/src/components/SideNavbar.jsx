@@ -66,6 +66,14 @@ const SideNavbar = ({ toggleSidebar }) => {
             Certificates
           </NavLink>
         </li>
+        <NavLink
+            to="/submission"
+            className={({ isActive }) =>
+              `block p-2 rounded ${isActive ? "bg-neutral-500" : "hover:bg-slate-400"}`
+            }
+          >
+            Submission
+          </NavLink>
       </ul>
     </aside>
   );
