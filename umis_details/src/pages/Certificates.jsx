@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+// src/components/Certificates.js
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FormContext } from '../context/FormContext'; // Import the FormContext
 
 const Certificates = () => {
   const navigate = useNavigate();
+  const { formData, setFormData } = useContext(FormContext); // Use context to get form data
 
-  const [formValues, setFormValues] = useState({
+  // Initialize form values from the context or set defaults
+  const [formValues, setFormValues] = useState(formData.certificateData || {
     communityCertificate: null,
     incomeCertificate: null,
     tenthMarksheet: null,
@@ -19,15 +23,14 @@ const Certificates = () => {
     nativityCertificate: null,
     migrationCertificate: null,
     aadharCard: null,
-    photo: null, // Added photo field
+    photo: null,
   });
 
   const handleFileChange = (e) => {
     const { name, files } = e.target;
-    setFormValues({
-      ...formValues,
-      [name]: files[0],
-    });
+    const updatedFormValues = { ...formValues, [name]: files[0] };
+    setFormValues(updatedFormValues); // Update local form values
+    setFormData({ ...formData, certificateData: updatedFormValues }); // Update context with certificate data
   };
 
   const handleSaveAndContinue = (e) => {
@@ -47,7 +50,7 @@ const Certificates = () => {
             <div className="fields">
               <div className="grid-container">
                 {/* Each certificate field */}
-                {[
+                {[ 
                   { label: 'Community Certificate', name: 'communityCertificate' },
                   { label: 'Income Certificate', name: 'incomeCertificate' },
                   { label: '10th Marksheet', name: 'tenthMarksheet' },
@@ -62,7 +65,7 @@ const Certificates = () => {
                   { label: 'Nativity Certificate', name: 'nativityCertificate' },
                   { label: 'Migration Certificate', name: 'migrationCertificate' },
                   { label: 'Aadhar Card', name: 'aadharCard' },
-                  { label: 'Photo', name: 'photo', accept: '.jpg, .jpeg, .png' }, // Added photo field
+                  { label: 'Photo', name: 'photo', accept: '.jpg, .jpeg, .png' },
                 ].map((item, index) => (
                   <div key={index} className="input-field mb-4">
                     <label className="block mb-2 font-semibold">{item.label}</label>

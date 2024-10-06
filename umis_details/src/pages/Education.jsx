@@ -1,12 +1,47 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { FormContext } from "../context/FormContext"; // Import the FormContext
 
 const Education = () => {
   const navigate = useNavigate();
+  const { formData, setFormData } = useContext(FormContext); // Use context to get formData and setFormData
+
+  const [formValues, setFormValues] = useState({
+    academic: '',
+    emis: '',
+    regno: '',
+    joining: '',
+    mail: '',
+    quota: '',
+    first: '',
+    special: '',
+    scholarship: '',
+    hostel: '',
+    hosteldate: ''
+  });
+
+  // Load form data from context if available
+  useEffect(() => {
+    if (formData.educationData) {
+      setFormValues(formData.educationData);
+    }
+  }, [formData]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+  };
 
   const handleSaveAndContinue = (e) => {
     e.preventDefault();
-    // You can perform any additional logic before navigation, if needed
+    // Save the current form data to the context
+    setFormData((prevData) => ({
+      ...prevData,
+      educationData: formValues,
+    }));
     navigate("/bank");
   };
 
@@ -25,7 +60,9 @@ const Education = () => {
               type="text"
               id="year"
               name="academic"
+              value={formValues.academic}
               required
+              onChange={handleInputChange}
               onInvalid={(e) => e.target.setCustomValidity("Please enter the academic year of joining")}
               onInput={(e) => e.target.setCustomValidity("")}
             />
@@ -37,7 +74,9 @@ const Education = () => {
             <input
               type="text"
               name="emis"
+              value={formValues.emis}
               required
+              onChange={handleInputChange}
               onInvalid={(e) => e.target.setCustomValidity("Please enter your EMIS number")}
               onInput={(e) => e.target.setCustomValidity("")}
             />
@@ -49,7 +88,9 @@ const Education = () => {
             <input
               type="text"
               name="regno"
+              value={formValues.regno}
               required
+              onChange={handleInputChange}
               onInvalid={(e) => e.target.setCustomValidity("Please enter your registration number")}
               onInput={(e) => e.target.setCustomValidity("")}
             />
@@ -61,7 +102,9 @@ const Education = () => {
             <input
               type="date"
               name="joining"
+              value={formValues.joining}
               required
+              onChange={handleInputChange}
               onInvalid={(e) => e.target.setCustomValidity("Please select your date of joining")}
               onInput={(e) => e.target.setCustomValidity("")}
             />
@@ -74,7 +117,9 @@ const Education = () => {
               type="email"
               id="email"
               name="mail"
+              value={formValues.mail}
               required
+              onChange={handleInputChange}
               onInvalid={(e) => e.target.setCustomValidity("Please enter a valid college email ID")}
               onInput={(e) => e.target.setCustomValidity("")}
             />
@@ -85,11 +130,13 @@ const Education = () => {
             <label>Quota</label>
             <select
               name="quota"
+              value={formValues.quota}
               required
+              onChange={handleInputChange}
               onInvalid={(e) => e.target.setCustomValidity("Please select a quota")}
               onInput={(e) => e.target.setCustomValidity("")}
             >
-              <option disabled selected>
+              <option value="" disabled>
                 Select Quota
               </option>
               <option>MQ</option>
@@ -103,11 +150,13 @@ const Education = () => {
             <label>First Graduate</label>
             <select
               name="first"
+              value={formValues.first}
               required
+              onChange={handleInputChange}
               onInvalid={(e) => e.target.setCustomValidity("Please select if you are a first graduate")}
               onInput={(e) => e.target.setCustomValidity("")}
             >
-              <option disabled selected>
+              <option value="" disabled>
                 Select Option
               </option>
               <option>YES</option>
@@ -120,11 +169,13 @@ const Education = () => {
             <label>Special Admission</label>
             <select
               name="special"
+              value={formValues.special}
               required
+              onChange={handleInputChange}
               onInvalid={(e) => e.target.setCustomValidity("Please select if you had special admission")}
               onInput={(e) => e.target.setCustomValidity("")}
             >
-              <option disabled selected>
+              <option value="" disabled>
                 Select Option
               </option>
               <option>YES</option>
@@ -137,11 +188,13 @@ const Education = () => {
             <label>Postmatric Scholarship</label>
             <select
               name="scholarship"
+              value={formValues.scholarship}
               required
+              onChange={handleInputChange}
               onInvalid={(e) => e.target.setCustomValidity("Please select if you have a postmatric scholarship")}
               onInput={(e) => e.target.setCustomValidity("")}
             >
-              <option disabled selected>
+              <option value="" disabled>
                 Select Option
               </option>
               <option>NO</option>
@@ -154,11 +207,13 @@ const Education = () => {
             <label>Hostel</label>
             <select
               name="hostel"
+              value={formValues.hostel}
               required
+              onChange={handleInputChange}
               onInvalid={(e) => e.target.setCustomValidity("Please select if you require hostel accommodation")}
               onInput={(e) => e.target.setCustomValidity("")}
             >
-              <option disabled selected>
+              <option value="" disabled>
                 Select Option
               </option>
               <option>YES</option>
@@ -172,7 +227,9 @@ const Education = () => {
             <input
               type="date"
               name="hosteldate"
+              value={formValues.hosteldate}
               required
+              onChange={handleInputChange}
               onInvalid={(e) => e.target.setCustomValidity("Please select your hostel date of joining")}
               onInput={(e) => e.target.setCustomValidity("")}
             />

@@ -1,12 +1,42 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { FormContext } from "../context/FormContext"; // Import the FormContext
 
 const BankDetails = () => {
   const navigate = useNavigate();
+  const { formData, setFormData } = useContext(FormContext); // Use context to get formData and setFormData
+
+  const [formValues, setFormValues] = useState({
+    accountHolder: '',
+    bankName: '',
+    accountNumber: '',
+    ifsc: '',
+    branch: '',
+    accountType: ''
+  });
+
+  // Load form data from context if available
+  useEffect(() => {
+    if (formData.bankData) {
+      setFormValues(formData.bankData);
+    }
+  }, [formData]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+  };
 
   const handleSaveAndContinue = (e) => {
     e.preventDefault();
-    // Perform any validation or save logic here if necessary
+    // Save the current form data to the context
+    setFormData((prevData) => ({
+      ...prevData,
+      bankData: formValues,
+    }));
     navigate("/address"); // Replace with the actual next page route
   };
 
@@ -25,7 +55,9 @@ const BankDetails = () => {
               type="text"
               id="accountHolder"
               name="accountHolder"
+              value={formValues.accountHolder}
               required
+              onChange={handleInputChange}
               onInvalid={(e) => e.target.setCustomValidity("Please enter the account holder's name")}
               onInput={(e) => e.target.setCustomValidity("")}
             />
@@ -38,7 +70,9 @@ const BankDetails = () => {
               type="text"
               id="bankName"
               name="bankName"
+              value={formValues.bankName}
               required
+              onChange={handleInputChange}
               onInvalid={(e) => e.target.setCustomValidity("Please enter the bank name")}
               onInput={(e) => e.target.setCustomValidity("")}
             />
@@ -51,7 +85,9 @@ const BankDetails = () => {
               type="text"
               id="accountNumber"
               name="accountNumber"
+              value={formValues.accountNumber}
               required
+              onChange={handleInputChange}
               onInvalid={(e) => e.target.setCustomValidity("Please enter your account number")}
               onInput={(e) => e.target.setCustomValidity("")}
             />
@@ -64,7 +100,9 @@ const BankDetails = () => {
               type="text"
               id="ifsc"
               name="ifsc"
+              value={formValues.ifsc}
               required
+              onChange={handleInputChange}
               onInvalid={(e) => e.target.setCustomValidity("Please enter your IFSC code")}
               onInput={(e) => e.target.setCustomValidity("")}
             />
@@ -77,7 +115,9 @@ const BankDetails = () => {
               type="text"
               id="branch"
               name="branch"
+              value={formValues.branch}
               required
+              onChange={handleInputChange}
               onInvalid={(e) => e.target.setCustomValidity("Please enter your branch name")}
               onInput={(e) => e.target.setCustomValidity("")}
             />
@@ -89,13 +129,13 @@ const BankDetails = () => {
             <select
               id="accountType"
               name="accountType"
+              value={formValues.accountType}
               required
+              onChange={handleInputChange}
               onInvalid={(e) => e.target.setCustomValidity("Please select an account type")}
               onInput={(e) => e.target.setCustomValidity("")}
             >
-              <option disabled selected>
-                Select Account Type
-              </option>
+              <option value="" disabled>Select Account Type</option>
               <option>Savings</option>
               <option>Current</option>
               <option>Fixed Deposit</option>

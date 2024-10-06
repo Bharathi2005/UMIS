@@ -1,103 +1,122 @@
+// src/components/Address.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { FormContext } from "../context/FormContext"; // Adjust the path if necessary
+
+const InputField = ({ label, name, value, onChange, required, type = 'text' }) => (
+  <div className="input-field">
+    <label htmlFor={name} className="block font-medium mb-1">
+      {label}
+    </label>
+    <input
+      type={type}
+      id={name}
+      name={name}
+      value={value}
+      onChange={onChange}
+      required={required}
+      className="border border-gray-300 rounded px-3 py-2 w-full"
+    />
+  </div>
+);
 
 const Address = () => {
   const navigate = useNavigate();
   const [isSameAddress, setIsSameAddress] = useState(false);
-  const [formData, setFormData] = useState({
+  const { formData, setFormData } = useContext(FormContext); // Use context to get form data
+
+  // Local state to manage the address data separately
+  const [addressData, setAddressData] = useState(formData.addressData || {
     currentAddress: '',
     permanentAddress: '',
     city: '',
+    permanentCity: '',
     state: '',
+    permanentState: '',
     zip: '',
+    permanentZip: '',
   });
 
-  // Handle input change
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    const updatedAddressData = { ...addressData, [name]: value };
+    setAddressData(updatedAddressData); // Update local address data
+    setFormData({ ...formData, addressData: updatedAddressData }); // Update context
   };
 
-  // Toggle function for the permanent address
   const handleToggle = () => {
     setIsSameAddress(!isSameAddress);
+    if (!isSameAddress) {
+      setAddressData({
+        ...addressData,
+        permanentAddress: addressData.currentAddress,
+        permanentCity: addressData.city,
+        permanentState: addressData.state,
+        permanentZip: addressData.zip,
+      });
+      setFormData({ ...formData, addressData: {
+        ...addressData,
+        permanentAddress: addressData.currentAddress,
+        permanentCity: addressData.city,
+        permanentState: addressData.state,
+        permanentZip: addressData.zip,
+      }});
+    } else {
+      setAddressData({
+        ...addressData,
+        permanentAddress: '',
+        permanentCity: '',
+        permanentState: '',
+        permanentZip: '',
+      });
+      setFormData({ ...formData, addressData: {
+        ...addressData,
+        permanentAddress: '',
+        permanentCity: '',
+        permanentState: '',
+        permanentZip: '',
+      }});
+    }
   };
 
   const handleSaveAndContinue = (e) => {
     e.preventDefault();
-    // Perform any validation or save logic here if necessary
-    navigate("/certificates"); // Navigate to the Bank Details page
+    navigate("/certificates"); // Navigate to the Certificates page
   };
 
   return (
-    <div className=" bg-gray-100  shadow-2xl rounded-lg p-6 max-w-lg mx-auto my-8">
+    <div className="bg-gray-100 shadow-2xl rounded-lg p-6 max-w-lg mx-auto my-8">
       <h2 className="text-2xl font-semibold text-center mb-6">Address Details</h2>
       <form onSubmit={handleSaveAndContinue} className="space-y-4">
-        {/* Current Address */}
-        <div className="input-field">
-          <label htmlFor="currentAddress" className="block font-medium mb-1">
-            Current Address
-          </label>
-          <input
-            type="text"
-            id="currentAddress"
-            name="currentAddress"
-            value={formData.currentAddress}
-            onChange={handleChange}
-            required
-            className="border border-gray-300 rounded px-3 py-2 w-full"
-          />
-        </div>
-
-        {/* City */}
-        <div className="input-field">
-          <label htmlFor="city" className="block font-medium mb-1">
-            City
-          </label>
-          <input
-            type="text"
-            id="city"
-            name="city"
-            value={formData.city}
-            onChange={handleChange}
-            required
-            className="border border-gray-300 rounded px-3 py-2 w-full"
-          />
-        </div>
-
-        {/* State */}
-        <div className="input-field">
-          <label htmlFor="state" className="block font-medium mb-1">
-            State
-          </label>
-          <input
-            type="text"
-            id="state"
-            name="state"
-            value={formData.state}
-            onChange={handleChange}
-            required
-            className="border border-gray-300 rounded px-3 py-2 w-full"
-          />
-        </div>
-
-        {/* Zip Code */}
-        <div className="input-field">
-          <label htmlFor="zip" className="block font-medium mb-1">
-            Zip Code
-          </label>
-          <input
-            type="text"
-            id="zip"
-            name="zip"
-            value={formData.zip}
-            onChange={handleChange}
-            required
-            className="border border-gray-300 rounded px-3 py-2 w-full"
-          />
-        </div>
-
-        {/* Toggle for Same Address */}
+        <InputField
+          label="Current Address"
+          name="currentAddress"
+          value={addressData.currentAddress}
+          onChange={handleChange}
+          required
+        />
+        <InputField
+          label="City"
+          name="city"
+          value={addressData.city}
+          onChange={handleChange}
+          required
+        />
+        <InputField
+          label="State"
+          name="state"
+          value={addressData.state}
+          onChange={handleChange}
+          required
+        />
+        <InputField
+          label="Zip Code"
+          name="zip"
+          value={addressData.zip}
+          onChange={handleChange}
+          required
+        />
         <div className="flex items-center mb-4">
           <input
             type="checkbox"
@@ -105,78 +124,42 @@ const Address = () => {
             checked={isSameAddress}
             onChange={handleToggle}
           />
-          <label>Permanent Address is different as Current Address</label>
+          <label>Permanent Address is the same as Current Address</label>
         </div>
-
-        {/* Permanent Address - Only shown when checkbox is checked */}
-        {isSameAddress && (
+        {!isSameAddress && (
           <>
-            <div className="input-field">
-              <label htmlFor="permanentAddress" className="block font-medium mb-1">
-                Permanent Address
-              </label>
-              <input
-                type="text"
-                id="permanentAddress"
-                name="permanentAddress"
-                value={formData.currentAddress} // Same as current address
-                readOnly // Make it read-only since it should be the same
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-
-            {/* Permanent Address City */}
-            <div className="input-field">
-              <label htmlFor="permanentCity" className="block font-medium mb-1">
-                Permanent Address City
-              </label>
-              <input
-                type="text"
-                id="permanentCity"
-                name="permanentCity"
-                value={formData.city} // Same as current city
-                readOnly // Make it read-only since it should be the same
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-
-            {/* Permanent Address State */}
-            <div className="input-field">
-              <label htmlFor="permanentState" className="block font-medium mb-1">
-                Permanent Address State
-              </label>
-              <input
-                type="text"
-                id="permanentState"
-                name="permanentState"
-                value={formData.state} // Same as current state
-                readOnly // Make it read-only since it should be the same
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-
-            {/* Permanent Address Zip Code */}
-            <div className="input-field">
-              <label htmlFor="permanentZip" className="block font-medium mb-1">
-                Permanent Address Zip Code
-              </label>
-              <input
-                type="text"
-                id="permanentZip"
-                name="permanentZip"
-                value={formData.zip} // Same as current zip
-                readOnly // Make it read-only since it should be the same
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
+            <InputField
+              label="Permanent Address"
+              name="permanentAddress"
+              value={addressData.permanentAddress}
+              onChange={handleChange}
+              required
+            />
+            <InputField
+              label="Permanent Address City"
+              name="permanentCity"
+              value={addressData.permanentCity}
+              onChange={handleChange}
+              required
+            />
+            <InputField
+              label="Permanent Address State"
+              name="permanentState"
+              value={addressData.permanentState}
+              onChange={handleChange}
+              required
+            />
+            <InputField
+              label="Permanent Address Zip Code"
+              name="permanentZip"
+              value={addressData.permanentZip}
+              onChange={handleChange}
+              required
+            />
           </>
         )}
-
         <div className="flex justify-end mt-4">
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded"
-          >
+          <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
             Save and Continue
           </button>
         </div>
