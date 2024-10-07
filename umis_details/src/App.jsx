@@ -22,6 +22,7 @@ const App = () => {
           <MainLayout />
         </div>
       </Router>
+      <Submission/>
     </FormProvider>
   );
 };
