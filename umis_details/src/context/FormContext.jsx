@@ -11,6 +11,7 @@ export const FormProvider = ({ children }) => {
     addressData: {},
     certificateData: {},
   });
+
   const [sidebarOpen, setSidebarOpen] = useState(true); 
 
   const toggleSidebar = () => {
