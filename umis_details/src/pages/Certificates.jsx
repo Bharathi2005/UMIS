@@ -51,21 +51,21 @@ const Certificates = () => {
               <div className="grid-container">
                 {/* Each certificate field */}
                 {[ 
-                  { label: 'Community Certificate', name: 'communityCertificate' },
-                  { label: 'Income Certificate', name: 'incomeCertificate' },
-                  { label: '10th Marksheet', name: 'tenthMarksheet' },
-                  { label: '11th Marksheet', name: 'eleventhMarksheet' },
-                  { label: '12th Marksheet', name: 'twelfthMarksheet' },
-                  { label: 'Allotment Order', name: 'allotmentOrder' },
-                  { label: 'Transfer Certificate', name: 'transferCertificate' },
-                  { label: 'First Graduate Certificate', name: 'firstGraduateCertificate' },
-                  { label: 'First Graduate Declaration', name: 'firstGraduateDeclaration' },
-                  { label: "Sibling's Bonafide (If 1st Graduate)", name: 'siblingsBonafide' },
-                  { label: 'Bank Passbook', name: 'bankPassbook' },
-                  { label: 'Nativity Certificate', name: 'nativityCertificate' },
-                  { label: 'Migration Certificate', name: 'migrationCertificate' },
-                  { label: 'Aadhar Card', name: 'aadharCard' },
-                  { label: 'Photo', name: 'photo', accept: '.jpg, .jpeg, .png' },
+                  { label: 'Community Certificate', name: 'Community Certificate' },
+                  { label: 'Income Certificate', name: 'Income Certificate' },
+                  { label: '10th Marksheet', name: 'Tenth Marksheet' },
+                  { label: '11th Marksheet', name: 'Eleventh Marksheet' },
+                  { label: '12th Marksheet', name: 'Twelfth Marksheet' },
+                  { label: 'Allotment Order', name: 'Allotment Order' },
+                  { label: 'Transfer Certificate', name: 'Transfer Certificate' },
+                  { label: 'First Graduate Certificate', name: 'First Graduate Certificate' },
+                  { label: 'First Graduate Declaration', name: 'First Graduate Declaration' },
+                  { label: "Sibling's Bonafide (If 1st Graduate)", name: 'Sibling Bonafide' },
+                  { label: 'Bank Passbook', name: 'Passbook' },
+                  { label: 'Nativity Certificate', name: 'Nativity Certificate' },
+                  { label: 'Migration Certificate', name: 'Migration Certificate' },
+                  { label: 'Aadhar Card', name: 'Aadhar Card' },
+                  { label: 'Photo', name: 'Photo', accept: '.jpg, .jpeg, .png' },
                 ].map((item, index) => (
                   <div key={index} className="input-field mb-4">
                     <label className="block mb-2 font-semibold">{item.label}</label>
