@@ -80,19 +80,27 @@ const Submission = () => {
         ),
       },
     ];
-
+  
+    // Add uploaded certificates as another row in Excel
+    const certificates = Object.entries(certificateData).map(([key, value]) => ({
+      [key.replace(/([A-Z])/g, " $1")]: value ? value.name : "Not uploaded",
+    }));
+  
+    data.push(...certificates);
+  
     const workbook = XLSX.utils.book_new();
     const worksheet = XLSX.utils.json_to_sheet(data);
     XLSX.utils.book_append_sheet(workbook, worksheet, "Form Data");
     XLSX.writeFile(workbook, "form_data.xlsx");
   };
+  
 
   const exportToPDF = () => {
     const doc = new jsPDF();
     doc.setFontSize(20);
     doc.text("Submission Details", 10, 10);
-
-    // Add Personal Details
+  
+    // Personal Details
     doc.setFontSize(14);
     doc.text("Personal Details:", 10, 20);
     doc.setFontSize(12);
@@ -109,8 +117,8 @@ const Submission = () => {
     doc.text(`Aadhar: ${personalData.aadhar}`, 10, 130);
     doc.text(`Mobile: ${personalData.mobile}`, 10, 140);
     doc.text(`Orphan: ${personalData.orphan}`, 10, 150);
-
-    // Add Education Details
+  
+    // Education Details
     doc.addPage();
     doc.setFontSize(14);
     doc.text("Education Details:", 10, 20);
@@ -126,8 +134,8 @@ const Submission = () => {
     doc.text(`Scholarship: ${educationData.scholarship}`, 10, 110);
     doc.text(`Hostel: ${educationData.hostel}`, 10, 120);
     doc.text(`Hostel Date: ${educationData.hosteldate}`, 10, 130);
-
-    // Add Address Details
+  
+    // Address Details
     doc.addPage();
     doc.setFontSize(14);
     doc.text("Address Details:", 10, 20);
@@ -140,9 +148,25 @@ const Submission = () => {
     doc.text(`Permanent State: ${addressData.permanentState}`, 10, 80);
     doc.text(`ZIP Code: ${addressData.zip}`, 10, 90);
     doc.text(`Permanent ZIP Code: ${addressData.permanentZip}`, 10, 100);
-
+  
+    // Certificate Details
+    doc.addPage();
+    doc.setFontSize(14);
+    doc.text("Certificate Details:", 10, 20);
+    Object.entries(certificateData).forEach(([key, value], index) => {
+      doc.setFontSize(12);
+      doc.text(
+        `${key.replace(/([A-Z])/g, " $1")}: ${
+          value ? value.name : "Not uploaded"
+        }`,
+        10,
+        30 + index * 10
+      );
+    });
+  
     doc.save("form_data.pdf");
   };
+  
 
   return (
     <>
