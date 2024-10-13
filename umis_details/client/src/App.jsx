@@ -12,6 +12,7 @@ import Address from "./pages/Address";
 import Certificates from "./pages/Certificates";
 import Submission from "./pages/Submission";
 import About from "./pages/About";
+import Family from './pages/Family.jsx';
 
 const App = () => {
   return (
@@ -59,6 +60,7 @@ const MainContent = ({ isOpen }) => {
         <Route path="/certificates" element={<Certificates />} />
         <Route path="/submission" element={<Submission />} />
         <Route path="/" element={<About />} />
+        <Route path="/family" element={<Family />} />
       </Routes>
     </div>
   );

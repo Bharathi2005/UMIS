@@ -49,6 +49,16 @@ const SideNavbar = ({ isOpen, toggleSidebar }) => {
           </li>
           <li>
             <NavLink
+              to="/family"
+              className={({ isActive }) =>
+                `block p-2 rounded ${isActive ? "bg-neutral-500" : "hover:bg-slate-400"}`
+              }
+            >
+              Family Details
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
               to="/bank"
               className={({ isActive }) =>
                 `block p-2 rounded ${isActive ? "bg-neutral-500" : "hover:bg-slate-400"}`

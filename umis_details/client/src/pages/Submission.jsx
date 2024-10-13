@@ -8,6 +8,7 @@ const Submission = () => {
   const {
     personalData,
     educationData,
+    familyData,
     bankData,
     addressData,
     certificateData,
@@ -52,6 +53,17 @@ const Submission = () => {
         Scholarship: educationData.scholarship,
         Hostel: educationData.hostel,
         "Hostel Date": educationData.hosteldate,
+      },
+      {
+        "Father Name": familyData.fathername,
+        "Father Mobile": familyData.fathermobile,
+        "Father Occupation": familyData.fatheroccupation,
+        "Annnual Income": familyData.annualincome,
+        "Mother Name": familyData.mothername,
+        "Mother Mobile": familyData.mothermobile,
+        "Mother Occupation": familyData.motheroccupation,
+        "Gaurdian Name": familyData.gaurdianname,
+        "Gaurdian Mobile": familyData.gaurdianmobile,
       },
       {
         "Account Holder": bankData.accountHolder,
@@ -134,6 +146,20 @@ const Submission = () => {
     doc.text(`Scholarship: ${educationData.scholarship}`, 10, 110);
     doc.text(`Hostel: ${educationData.hostel}`, 10, 120);
     doc.text(`Hostel Date: ${educationData.hosteldate}`, 10, 130);
+
+    doc.addPage();
+    doc.setFontSize(14);
+    doc.text("Family Details:", 10, 20);
+    doc.setFontSize(12);
+    doc.text(`Father Name: ${familyData.fathername}`, 10, 30);
+    doc.text(`Father Mobile: ${familyData.fathermobile}`, 10, 40);
+    doc.text(`Father Occupation: ${familyData.fatheroccupation}`, 10, 50);
+    doc.text(`Annual Income: ${familyData.annualincome}`, 10, 60);
+    doc.text(`Mother Name: ${familyData.mothername}`, 10, 70);
+    doc.text(`Mother Mobile: ${familyData.mothermobile}`, 10, 80);
+    doc.text(`Mother Ocuupation: ${familyData.motheroccupation}`, 10, 90);
+    doc.text(`Gaurdian Name: ${familyData.gaurdianname}`, 10, 100);
+    doc.text(`Gaurdian Mobile: ${familyData.gaurdianmobile}`, 10, 110);
   
     // Address Details
     doc.addPage();
@@ -208,6 +234,19 @@ const Submission = () => {
         <p><strong>Hostel:</strong> {educationData.hostel}</p>
         <p><strong>Hostel Date:</strong> {educationData.hosteldate}</p>
       </div>
+      <br></br>
+      <h3 className="text-xl font-extrabold mt-6 mb-2">Family Details</h3>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <p><strong>Father Name:</strong> {familyData.fathername}</p>
+        <p><strong>Father Mobile:</strong> {familyData.fathermobile}</p>
+        <p><strong>Father Occupation:</strong> {familyData.fatheroccupation}</p>
+        <p><strong>Annual Income:</strong> {familyData.annualincome}</p>
+        <p><strong>Mother Name:</strong> {familyData.mothername}</p>
+        <p><strong>Mother Mobile:</strong> {familyData.mothermobile}</p>
+        <p><strong>Mother Occupation:</strong> {familyData.motheroccupation}</p>
+        <p><strong>Gaurdian Name:</strong> {familyData.gaurdianname}</p>
+        <p><strong>Gaurdian Mobile:</strong> {familyData.gaurdianmobile}</p>
+      </div>
         <br></br>
       <h3 className="text-xl font-extrabold mt-6 mb-2">Bank Details</h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -230,6 +269,7 @@ const Submission = () => {
         <p><strong>ZIP Code:</strong> {addressData.zip}</p>
         <p><strong>Permanent ZIP Code:</strong> {addressData.permanentZip}</p>
       </div>
+      
         <br></br>
       <h3 className="text-xl font-extrabold mt-6 mb-2">Certificate Details</h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

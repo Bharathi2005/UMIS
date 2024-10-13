@@ -42,7 +42,7 @@ const Education = () => {
       ...prevData,
       educationData: formValues,
     }));
-    navigate("/bank");
+    navigate("/family");
   };
 
   return (
