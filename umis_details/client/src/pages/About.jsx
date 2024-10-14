@@ -9,8 +9,7 @@ const About = () => {
   };
 
   return (
-    
-
+  
     <div className="instructions-container bg-gray-100 p-8 rounded-lg shadow-2xl max-w-3xl mx-auto my-8">
       <h2 className="text-3xl font-bold mb-6 text-blue-800 text-center">General Instructions for Filling Out the Form</h2>
 
